@@ -8,6 +8,7 @@ let resultInput = 0;
 let operators = [];
 let numOpr = [];
 let value ;
+numberString = '';
 //cut array
 
 //result
@@ -15,8 +16,10 @@ function finalResult(string) {
   for (let i = 0; i < string.length; i++) {
     value = string[i];
     if (value != "+" && value != "-" && value != "*" && value != "/") {    
-      numOpr.push(parseFloat(value));
+      numberString += value
     } else {
+      numOpr.push(parseFloat(numberString));
+      numberString = '';
       if (
         operators.length > 0 &&
         compareOpr(value) >= compareOpr(operators[operators.length - 1])
@@ -26,6 +29,8 @@ function finalResult(string) {
       operators.push(value);
     }
   }
+  numOpr.push(parseFloat(numberString));
+  numberString = '';
   while (operators.length > 0) {
     resultInput = calculator(numOpr, operators);
   }
